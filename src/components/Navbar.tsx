@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
         <div className="logo-container">
           <Avatar src={logo} size="large" />
           <Title level={2} className="logo">
-            <Link to="/">Cryptoverse</Link>
+            <Link to="/">Crypto Sneaker</Link>
           </Title>
           <Button
             className="menu-control-container"
