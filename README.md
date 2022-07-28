@@ -1,6 +1,8 @@
 # Crypto Sneaker
 > Deployed - [Crypto Sneaker](https://crypto-sneaker-n1f5ctedi-oraion13.vercel.app/references)
 
+![Crypto Sneaker](https://i.ibb.co/NrR8DW5/image-2022-07-28-204329392.png)
+
 <hr>
 
 ## About
