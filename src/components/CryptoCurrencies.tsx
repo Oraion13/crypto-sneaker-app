@@ -2,18 +2,26 @@ import { Card, Col, Row, Input } from "antd";
 import millify from "millify";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { useGetCoinsQuery } from "../services/cryptoApi";
+
 import { CoinsDataCoins } from "../types";
 import { CryptoCurrenciesProps } from "../types";
+import Loader from "./Loader";
 
 const CryptoCurrencies = ({ simplified }: CryptoCurrenciesProps) => {
+  // simplified for homepage
   const count = simplified ? 10 : 100;
 
+  // Data
   const { data, isFetching } = useGetCoinsQuery(count);
+  // Set data
   const [coins, setCoins] = useState<Array<CoinsDataCoins> | undefined>(
     data?.data?.coins
   );
+  // To filter coins
   const [searchItem, setSearchItem] = useState<string>("");
+  // get initial data
   useEffect(() => {
     setCoins(
       data?.data?.coins?.filter((coin) =>
@@ -22,8 +30,10 @@ const CryptoCurrencies = ({ simplified }: CryptoCurrenciesProps) => {
     );
   }, [data, searchItem]);
 
-  if (isFetching) return <>Loading...</>;
+  // Loadin icon
+  if (isFetching) return <Loader />;
 
+  // Set filter
   const onChangeSearchItem = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchItem(e.target.value);
   };

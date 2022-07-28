@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Select, Typography, Row, Col, Avatar, Card } from "antd";
 import moment from "moment";
 
@@ -6,6 +6,7 @@ import { useGetCoinsQuery } from "../services/cryptoApi";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
 
 import { CryptoCurrenciesProps } from "../types";
+import Loader from "./Loader";
 
 const demoImage =
   "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
@@ -14,14 +15,17 @@ const { Text, Title } = Typography;
 const { Option } = Select;
 
 const News = ({ simplified }: CryptoCurrenciesProps) => {
+  // set category for filter
   const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
+  // get news coins and news data
   const { data } = useGetCoinsQuery(100);
   const { data: cryptoNews } = useGetCryptoNewsQuery({
     newsCategory,
     count: simplified ? 6 : 12,
   });
 
-  if (!cryptoNews?.value) return <>Loading...</>;
+  // Loading icon
+  if (!cryptoNews?.value) return <Loader />;
 
   return (
     <Row gutter={[24, 24]}>
@@ -44,6 +48,7 @@ const News = ({ simplified }: CryptoCurrenciesProps) => {
           </Select>
         </Col>
       )}
+
       {cryptoNews.value.map((news, i) => (
         <Col xs={24} sm={12} lg={8} key={i}>
           <Card hoverable className="news-card">
@@ -57,11 +62,13 @@ const News = ({ simplified }: CryptoCurrenciesProps) => {
                   alt=""
                 />
               </div>
+
               <p>
                 {news.description.length > 100
                   ? `${news.description.substring(0, 100)}...`
                   : news.description}
               </p>
+
               <div className="provider-container">
                 <div>
                   <Avatar
@@ -71,10 +78,12 @@ const News = ({ simplified }: CryptoCurrenciesProps) => {
                     }
                     alt=""
                   />
+
                   <Text className="provider-name">
                     {news.provider[0]?.name}
                   </Text>
                 </div>
+
                 <Text>
                   {moment(news.datePublished).startOf("day").fromNow()}
                 </Text>

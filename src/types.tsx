@@ -36,7 +36,7 @@ export interface CoinsType {
   data: CoinsData;
 }
 
-// -------------------------------------- Crypto Bing News --------------------------------------
+// -------------------------------------- Crypto Bing News -------------------------------------- //
 
 interface NewsValueProviderImageThumbnail {
   _type: string;
@@ -51,7 +51,7 @@ interface NewsValueProviderImage {
 interface NewsValueProvider {
   _type: string;
   name: string;
-  image: NewsValueProviderImage
+  image: NewsValueProviderImage;
 }
 
 interface NewsValueAbout {
@@ -100,6 +100,109 @@ export type NewsQueryProps = {
   count: number;
 };
 
+// -------------------------------------- Coin Details -------------------------------------- //
+
+interface CoinDataAllTimeHigh {
+  price: string;
+  timestamp: number;
+}
+
+interface CoinDataSupply {
+  confirmed: boolean;
+  circulating: string;
+  total: string;
+}
+
+interface CoinDataLinks {
+  name: string;
+  url: string;
+  type: string;
+}
+
+interface CoinData {
+  uuid: string;
+  symbol: string;
+  name: string;
+  description: string;
+  color: string;
+  iconUrl: string;
+  websiteUrl: string;
+  links: Array<CoinDataLinks>;
+  supply: CoinDataSupply;
+  "24hVolume": string;
+  marketCap: string;
+  price: string;
+  btcPrice: string;
+  priceAt: number;
+  change: string;
+  rank: number;
+  numberOfMarkets: number;
+  numberOfExchanges: number;
+  listedAt: number;
+  sparkline: Array<string>;
+  allTimeHigh: CoinDataAllTimeHigh;
+  coinrankingUrl: string;
+}
+
+interface CoinDataCoin {
+  coin: CoinData;
+}
+
+export interface CoinType {
+  status: string;
+  data: CoinDataCoin;
+}
+
+// -------------------------------------- Coin History --------------------------------------
+
+interface CoinHistoryDataHistory {
+  price: string;
+  timestamp: number;
+}
+
+interface CoinHistoryData {
+  change: string;
+  history: Array<CoinHistoryDataHistory>;
+}
+
+export interface CoinHistoryType {
+  status: string;
+  data: CoinHistoryData;
+}
+
+export type CoinHistoryQueryProps = {
+  coinId: string | undefined;
+  timeperiod: string;
+};
+
+// -------------------------------------- Reference Currencies  -------------------------------------- //
+
+interface ReferenceCurrencies {
+  uuid: string;
+  type: string;
+  symbol: string;
+  name: string;
+  iconUrl: string;
+  sign: string;
+}
+
+interface ReferenceStats {
+  total: number;
+}
+
+export interface ReferenceType {
+  data: {
+    stats: ReferenceStats;
+    currencies: Array<ReferenceCurrencies>;
+  };
+}
+
 // -------------------------------------- Components  -------------------------------------- //
 
 export type CryptoCurrenciesProps = { simplified?: boolean };
+
+export type LineChartProps = {
+  coinHistory: CoinHistoryType | undefined;
+  currentPrice: string;
+  coinName: string | undefined;
+};
