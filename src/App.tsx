@@ -12,6 +12,7 @@ import {
   News,
   HomePage,
 } from "./components";
+import { GithubOutlined, LinkedinOutlined, TwitterOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
@@ -61,6 +62,29 @@ const App: React.FC = (): ReactElement => {
               <Link to="/">Home</Link>
               <Link to="/references">Reference Currencies</Link>
               <Link to="/news">News</Link>
+            </Space>
+            <Space>
+              <a
+                href="https://twitter.com/Kannan13B"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <TwitterOutlined style={{fontSize: '25px', margin: '6px'}} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/kannan-b-5ba865215/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <LinkedinOutlined style={{fontSize: '25px', margin: '6px'}} />
+              </a>
+              <a
+                href="https://github.com/Oraion13"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <GithubOutlined style={{fontSize: '25px', margin: '6px'}} />
+              </a>
             </Space>
           </div>
         </div>
